@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zorvintech Private Limited – Strength. Vision. Technology.</title>
+<meta name="description" content="Zorvintech Private Limited – IT Projects, Non-IT Projects and IT Consulting services based in Visakhapatnam, India. Serving India & UK.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --ink:      #09060F;
+  --ink2:     #130D24;
+  --ink3:     #1E1638;
+  --ink4:     #2A2050;
+  --violet:   #6C3FE8;
+  --violet2:  #5530C8;
+  --violet3:  #3D1FA0;
+  --gold:     #F0B429;
+  --gold2:    #C8920A;
+  --cream:    #FFFBF2;
+  --white:    #FFFFFF;
+  --fog:      #F5F2FF;
+  --border:   rgba(108,63,232,0.18);
+  --border-g: rgba(240,180,41,0.25);
+  --tx1:      #09060F;
+  --tx2:      #3E3060;
+  --tx3:      #7A6A9A;
+  --green:    #00C47A;
+  --shadow:   0 20px 60px rgba(9,6,15,0.15);
+  --shadow-v: 0 12px 40px rgba(108,63,232,0.22);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--tx1); background: var(--white);
+  overflow-x: hidden; line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+═══════════════════════════════════════════════ */
+.ann-bar {
+  background: var(--ink);
+  border-bottom: 1px solid rgba(108,63,232,0.3);
+  padding: 0.45rem 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem;
+}
+.ann-bar span { color: rgba(255,255,255,0.45); }
+.ann-bar .highlight { color: var(--gold); font-weight: 600; }
+.ann-contact { display: flex; gap: 1.5rem; }
+.ann-contact a { color: rgba(255,255,255,0.55); font-size: 0.78rem; transition: color .2s; }
+.ann-contact a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(9,6,15,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(108,63,232,0.2);
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.5); }
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.03em;
+  display: flex; align-items: center; gap: 0.15em;
+}
+.logo-accent { color: var(--gold); }
+.logo-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--violet); margin-left: 3px; margin-bottom: 14px;
+  display: inline-block;
+}
+.nav-links {
+  display: flex; align-items: center;
+  gap: 2.2rem; list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.875rem; font-weight: 400;
+  letter-spacing: 0.025em;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.nav-cta {
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  color: var(--gold); padding: 0.5rem 1.5rem;
+  border-radius: 3px; font-size: 0.875rem; font-weight: 500;
+  letter-spacing: 0.04em; transition: all .25s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--ink); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all .3s; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  min-height: calc(100vh - 72px);
+  background: var(--ink);
+  display: flex; align-items: center;
+  padding: 80px 5% 80px;
+  position: relative; overflow: hidden;
+}
+/* Dot-grid pattern */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(108,63,232,0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+/* Purple glow right */
+.hero-glow-r {
+  position: absolute; top: -10%; right: -8%;
+  width: 650px; height: 650px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,63,232,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Gold glow bottom-left */
+.hero-glow-l {
+  position: absolute; bottom: -15%; left: -5%;
+  width: 450px; height: 450px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1240px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
+  gap: 5rem; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 1.4rem;
+}
+.hero-kicker::before { content:''; width: 36px; height: 1px; background: var(--gold); }
+.hero-kicker::after  { content:''; width: 36px; height: 1px; background: var(--gold); }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+  font-weight: 700; line-height: 1.08;
+  color: var(--white); margin-bottom: 0.3rem;
+  letter-spacing: -0.015em;
+}
+.hero h1 .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--gold);
+}
+.hero h1 .outline2 {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+}
+.hero-sub {
+  font-size: 1.1rem; line-height: 1.8;
+  color: rgba(255,255,255,0.58);
+  max-width: 520px; margin: 1.5rem 0 2.8rem;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+.btn-primary-gold {
+  background: var(--gold); color: var(--ink);
+  padding: 0.9rem 2.2rem; border-radius: 3px;
+  font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: all .3s;
+}
+.btn-primary-gold:hover {
+  background: var(--gold2); transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(240,180,41,0.38);
+}
+.btn-outline-white {
+  border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.8);
+  padding: 0.9rem 2.2rem; border-radius: 3px;
+  font-size: 0.95rem; transition: all .25s;
+}
+.btn-outline-white:hover { border-color: var(--violet); color: var(--white); }
+.hero-trust {
+  display: flex; align-items: center; gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; color: rgba(255,255,255,0.45);
+}
+.trust-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); }
+/* Hero right cards */
+.hero-cards { display: flex; flex-direction: column; gap: 1rem; }
+.h-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(108,63,232,0.2);
+  border-radius: 12px; padding: 1.5rem 1.75rem;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 1.25rem; align-items: start;
+  transition: all .35s;
+  animation: slideFadeIn .6s ease both;
+}
+.h-card:nth-child(1){ animation-delay:.1s; }
+.h-card:nth-child(2){ animation-delay:.25s; border-left: 2px solid var(--gold); }
+.h-card:nth-child(3){ animation-delay:.4s; }
+.h-card:nth-child(4){ animation-delay:.55s; background: rgba(108,63,232,0.08); border-color: rgba(108,63,232,0.35); }
+@keyframes slideFadeIn {
+  from { opacity:0; transform: translateX(24px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+.h-card:hover { border-color: rgba(108,63,232,0.45); transform: translateX(-5px); }
+.h-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(108,63,232,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.h-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+.h-card p  { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+.h-card.stat-row { grid-template-columns: 1fr; padding: 1.25rem 1.75rem; }
+.stats-row { display: flex; gap: 0; }
+.stat-item { flex: 1; text-align: center; padding: 0 0.5rem; }
+.stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,0.1); }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; color: var(--gold);
+}
+.stat-l { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 0.1rem; }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════════════ */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 5%; }
+.section { padding: 110px 5%; }
+.section-sm { padding: 80px 5%; }
+.eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 0.85rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.eyebrow::before { content:''; flex: 0 0 28px; height: 1px; }
+.eyebrow.violet  { color: var(--violet); }
+.eyebrow.violet::before { background: var(--violet); }
+.eyebrow.gold    { color: var(--gold); }
+.eyebrow.gold::before   { background: var(--gold); }
+.eyebrow.light   { color: rgba(255,255,255,0.5); }
+.eyebrow.light::before  { background: rgba(255,255,255,0.3); }
+.heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700; line-height: 1.18; letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.heading.light { color: var(--white); }
+.subtext { font-size: 1.02rem; color: var(--tx2); line-height: 1.78; max-width: 600px; }
+.subtext.light { color: rgba(255,255,255,0.55); }
+
+/* Reveal animation */
+.reveal { opacity:0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform: translateY(0); }
+.reveal-l { opacity:0; transform: translateX(-30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-l.visible { opacity:1; transform: translateX(0); }
+.reveal-r { opacity:0; transform: translateX(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-r.visible { opacity:1; transform: translateX(0); }
+
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+.about { background: var(--fog); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: 5rem; align-items: center;
+}
+.about-visual {
+  position: relative;
+}
+.about-card-main {
+  background: var(--ink2); border-radius: 20px;
+  padding: 3rem; overflow: hidden; position: relative;
+}
+.about-card-main::before {
+  content:'';
+  position: absolute; top:-40%; right:-25%;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,63,232,0.22) 0%, transparent 65%);
+}
+.about-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem; color: var(--white);
+  line-height: 1.55; font-style: italic;
+  margin-bottom: 2.5rem; position: relative; z-index: 1;
+}
+.about-quote em { color: var(--gold); font-style: normal; }
+.kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.75rem; position: relative; z-index: 1;
+}
+.kpi { text-align: center; padding: 0 0.5rem; }
+.kpi + .kpi { border-left: 1px solid rgba(255,255,255,0.08); }
+.kpi-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; color: var(--gold); font-weight: 700;
+}
+.kpi-l { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; line-height: 1.3; }
+.about-badge {
+  position: absolute; bottom: -1.2rem; right: 1.5rem;
+  background: var(--gold); color: var(--ink);
+  border-radius: 100px; padding: 0.6rem 1.4rem;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+  box-shadow: var(--shadow-v);
+}
+
+.about-text .heading { margin-bottom: 0.75rem; }
+.about-text p { font-size: 1rem; color: var(--tx2); line-height: 1.85; margin-bottom: 1rem; }
+.value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.75rem; }
+.value-pill {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.9rem 1rem;
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.88rem; color: var(--tx2); font-weight: 500;
+  transition: all .25s;
+}
+.value-pill:hover { border-color: var(--violet); color: var(--violet); box-shadow: var(--shadow-v); }
+.value-pill .vi { color: var(--violet); font-size: 1rem; }
+
+/* ═══════════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════════ */
+.services { background: var(--ink); }
+.services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.svc {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(108,63,232,0.15);
+  border-radius: 16px; padding: 2.75rem 2.25rem;
+  position: relative; overflow: hidden;
+  transition: all .4s;
+  cursor: default;
+}
+.svc::before {
+  content:'';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--gold));
+  transform: scaleX(0); transform-origin: left; transition: transform .45s;
+}
+.svc::after {
+  content:'';
+  position: absolute; top: -60%; right: -40%;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,63,232,0.08) 0%, transparent 65%);
+  pointer-events: none; transition: all .4s;
+}
+.svc:hover { border-color: rgba(108,63,232,0.4); transform: translateY(-8px); background: rgba(108,63,232,0.06); box-shadow: var(--shadow-v); }
+.svc:hover::before { transform: scaleX(1); }
+.svc:hover::after  { top: -30%; right: -20%; }
+.svc-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; font-weight: 700;
+  color: rgba(108,63,232,0.15); line-height: 1;
+  margin-bottom: 1.25rem; user-select: none;
+  transition: color .3s;
+}
+.svc:hover .svc-number { color: rgba(240,180,41,0.25); }
+.svc h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; color: var(--white); font-weight: 600;
+  margin-bottom: 1rem;
+}
+.svc p { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 2rem; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.svc-list li {
+  font-size: 0.83rem; color: rgba(255,255,255,0.6);
+  display: flex; align-items: center; gap: 0.65rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.svc-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.svc-list li::before { content:'→'; color: var(--violet); font-weight: 700; flex-shrink: 0; }
+.svc-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--gold); font-size: 0.85rem; font-weight: 500;
+  margin-top: 1.5rem; letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(240,180,41,0.3);
+  padding-bottom: 2px; transition: all .2s;
+}
+.svc-link:hover { gap: 0.8rem; border-bottom-color: var(--gold); }
+
+/* ═══════════════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════════════ */
+.process { background: var(--fog); }
+.process-track {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; position: relative; margin-top: 1rem;
+}
+.process-track::before {
+  content: '';
+  position: absolute; top: 50px; left: calc(10% + 10px); right: calc(10% + 10px); height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--gold));
+  z-index: 0;
+}
+.p-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+.p-ball {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: var(--white);
+  border: 2px solid rgba(108,63,232,0.2);
+  box-shadow: 0 0 0 8px var(--fog);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; margin-bottom: 1.5rem;
+  transition: all .35s; position: relative;
+}
+.p-ball .p-num {
+  position: absolute; top: -4px; right: -4px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--violet); color: white;
+  font-size: 0.68rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.p-step:hover .p-ball {
+  background: var(--ink2); border-color: var(--violet);
+  transform: scale(1.08); box-shadow: 0 0 0 8px var(--fog), var(--shadow-v);
+}
+.p-step h4 { font-weight: 600; font-size: 1rem; color: var(--tx1); margin-bottom: 0.5rem; }
+.p-step p  { font-size: 0.82rem; color: var(--tx3); line-height: 1.55; }
+
+/* ═══════════════════════════════════════════════
+   TECH STACK
+═══════════════════════════════════════════════ */
+.stack { background: var(--ink2); }
+.stack-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1rem; }
+.stack-cat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(108,63,232,0.15);
+  border-radius: 12px; padding: 1.5rem 1.25rem;
+  transition: all .3s;
+}
+.stack-cat:hover { border-color: rgba(108,63,232,0.4); transform: translateY(-4px); }
+.stack-cat h4 {
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 1rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid rgba(108,63,232,0.15);
+}
+.stack-cat ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.stack-cat ul li { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+/* ═══════════════════════════════════════════════
+   ENGAGEMENT MODELS
+═══════════════════════════════════════════════ */
+.models { background: var(--fog); }
+.models-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.model {
+  background: var(--white); border-radius: 16px;
+  padding: 2.75rem 2.25rem;
+  box-shadow: 0 2px 24px rgba(9,6,15,0.07);
+  border: 1px solid rgba(108,63,232,0.1);
+  position: relative; overflow: hidden; transition: all .35s;
+}
+.model::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--violet);
+}
+.model.featured::before { background: linear-gradient(90deg, var(--violet), var(--gold)); }
+.model.featured {
+  border-color: var(--border-g);
+  box-shadow: 0 4px 40px rgba(108,63,232,0.14);
+}
+.model:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+.model-badge {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: var(--gold); color: var(--ink);
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 100px;
+}
+.model-icon { font-size: 2.2rem; margin-bottom: 1.5rem; }
+.model h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; color: var(--tx1); font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.model .desc { font-size: 0.9rem; color: var(--tx2); line-height: 1.7; margin-bottom: 1.75rem; }
+.model-feats { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.model-feats li {
+  font-size: 0.85rem; color: var(--tx2);
+  display: flex; align-items: flex-start; gap: 0.65rem;
+}
+.model-feats li::before { content:'✓'; color: var(--violet); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.model-feats li.gold-li::before { color: var(--gold2); }
+.model-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--fog); border: 1px solid var(--border);
+  border-radius: 100px; padding: 0.3rem 0.85rem;
+  font-size: 0.75rem; color: var(--violet); font-weight: 500;
+  margin-top: 1.75rem;
+}
+
+/* ═══════════════════════════════════════════════
+   USE CASES
+═══════════════════════════════════════════════ */
+.cases { background: var(--ink); }
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.case-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(108,63,232,0.18);
+  border-radius: 16px; padding: 2.5rem 2rem;
+  transition: all .35s;
+}
+.case-card:hover { border-color: rgba(240,180,41,0.35); transform: translateY(-6px); }
+.case-type {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(108,63,232,0.15); border: 1px solid rgba(108,63,232,0.3);
+  color: rgba(255,255,255,0.7); padding: 0.3rem 0.8rem;
+  border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.case-card h3 { font-size: 1rem; color: var(--white); font-weight: 600; margin-bottom: 1.25rem; line-height: 1.4; }
+.case-block { margin-bottom: 1rem; }
+.case-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.35rem; }
+.case-text  { font-size: 0.875rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+.case-result {
+  background: rgba(240,180,41,0.08); border: 1px solid rgba(240,180,41,0.2);
+  border-radius: 8px; padding: 1rem 1.1rem; margin-top: 1.5rem;
+}
+.case-result .label { color: var(--gold); }
+.case-result .case-text { color: rgba(255,255,255,0.75); font-weight: 500; font-size: 0.85rem; }
+
+/* ═══════════════════════════════════════════════
+   WHY ZORVINTECH
+═══════════════════════════════════════════════ */
+.why { background: var(--fog); }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.why-card {
+  background: var(--white); border-radius: 14px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 2px 20px rgba(9,6,15,0.06);
+  border-top: 3px solid var(--violet);
+  transition: all .3s;
+}
+.why-card:nth-child(2n) { border-top-color: var(--gold); }
+.why-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(108,63,232,0.14); }
+.why-icon { font-size: 1.8rem; margin-bottom: 1.1rem; }
+.why-card h4 { font-size: 1.05rem; font-weight: 600; color: var(--tx1); margin-bottom: 0.6rem; }
+.why-card p  { font-size: 0.88rem; color: var(--tx2); line-height: 1.68; }
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+.contact { background: var(--ink); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+.contact-info .heading { color: var(--white); }
+.contact-intro { font-size: 1.02rem; color: rgba(255,255,255,0.55); line-height: 1.78; margin-bottom: 2.75rem; }
+.c-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.c-item { display: flex; align-items: center; gap: 1.1rem; }
+.c-icon-box {
+  width: 50px; height: 50px; border-radius: 12px;
+  background: rgba(108,63,232,0.12);
+  border: 1px solid rgba(108,63,232,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0; transition: all .25s;
+}
+.c-item:hover .c-icon-box { background: rgba(240,180,41,0.15); border-color: var(--gold); }
+.c-meta { display: flex; flex-direction: column; gap: 0.1rem; }
+.c-label { font-size: 0.7rem; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+.c-value { font-size: 0.95rem; color: var(--white); font-weight: 400; }
+/* Contact form */
+.contact-form {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(108,63,232,0.22);
+  border-radius: 20px; padding: 3rem;
+}
+.form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; color: var(--white); margin-bottom: 0.4rem;
+}
+.form-sub { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fg { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.1rem; }
+.fg label { font-size: 0.76rem; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; text-transform: uppercase; }
+.fg input, .fg textarea, .fg select {
+  padding: 0.8rem 1rem; border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(108,63,232,0.22);
+  color: var(--white);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.9rem; outline: none;
+  transition: border-color .25s, background .25s;
+  width: 100%;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.2); }
+.fg input:focus, .fg textarea:focus, .fg select:focus {
+  border-color: var(--violet); background: rgba(108,63,232,0.08);
+}
+.fg select option { background: var(--ink2); }
+.fg textarea { resize: vertical; min-height: 120px; }
+.submit-btn {
+  width: 100%; padding: 1rem;
+  background: linear-gradient(135deg, var(--violet), var(--violet2));
+  border: none; border-radius: 8px; cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 600; color: var(--white);
+  letter-spacing: 0.03em;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  transition: all .3s; margin-top: 0.5rem;
+}
+.submit-btn:hover {
+  opacity: 0.92; transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(108,63,232,0.42);
+}
+.submit-btn.success { background: linear-gradient(135deg, #00C47A, #009A60); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: #060409; padding: 4rem 5% 2rem;
+  border-top: 1px solid rgba(108,63,232,0.2);
+}
+.footer-top {
+  display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr;
+  gap: 3.5rem; max-width: 1240px; margin: 0 auto 3.5rem;
+}
+.footer-brand .f-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; color: var(--white); font-weight: 700;
+  margin-bottom: 1rem;
+}
+.footer-brand .f-logo span { color: var(--gold); }
+.footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.35); line-height: 1.75; margin-bottom: 1.5rem; max-width: 280px; }
+.footer-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.f-badge {
+  background: rgba(108,63,232,0.12); border: 1px solid rgba(108,63,232,0.25);
+  border-radius: 100px; padding: 0.3rem 0.85rem;
+  font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;
+}
+.footer-col h4 {
+  color: var(--white); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.38); font-size: 0.85rem;
+  transition: color .2s; display: flex; align-items: center; gap: 0.4rem;
+}
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-col ul li a::before { content:'›'; opacity: 0; transition: opacity .2s; }
+.footer-col ul li a:hover::before { opacity: 1; }
+.footer-bottom {
+  max-width: 1240px; margin: 0 auto;
+  padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; color: rgba(255,255,255,0.22); flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom .brand-strip { display: flex; align-items: center; gap: 0.6rem; }
+.footer-bottom .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--violet); }
+
+/* ═══════════════════════════════════════════════
+   MOBILE MENU
+═══════════════════════════════════════════════ */
+.mobile-menu {
+  display: none; position: fixed;
+  top: 72px; left: 0; right: 0; bottom: 0; z-index: 150;
+  background: rgba(9,6,15,0.97); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 1.4rem; color: rgba(255,255,255,0.75); font-family: 'Cormorant Garamond', serif; transition: color .2s; }
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu .m-cta {
+  border: 1.5px solid var(--gold); color: var(--gold);
+  padding: 0.75rem 2.5rem; border-radius: 3px; font-size: 1rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid, .models-grid, .cases-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-track { grid-template-columns: 1fr; gap: 2rem; }
+  .process-track::before { display: none; }
+  .stack-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .kpi-row { grid-template-columns: repeat(2,1fr); gap: 1rem; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .services-grid, .models-grid, .cases-grid, .why-grid { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 3rem; }
+  .ann-bar .ann-contact { display: none; }
+  .f-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann-bar">
+  <span>🌏 Serving clients in <span class="highlight">India</span> & <span class="highlight">United Kingdom</span> · Est. 2026</span>
+  <div class="ann-contact">
+    <a href="tel:+919666313567">📞 +91 9666313567</a>
+    <a href="mailto:nbkoti.uk@gmail.com">✉ nbkoti.uk@gmail.com</a>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a href="#" class="logo">Zorvin<span class="logo-accent">tech</span><span class="logo-dot"></span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#stack">Technologies</a></li>
+    <li><a href="#models">Engagement</a></li>
+    <li><a href="#cases">Use Cases</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Proposal</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"    onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#process"  onclick="closeMobile()">Process</a>
+  <a href="#stack"    onclick="closeMobile()">Technologies</a>
+  <a href="#models"   onclick="closeMobile()">Engagement</a>
+  <a href="#cases"    onclick="closeMobile()">Use Cases</a>
+  <a href="#contact"  onclick="closeMobile()">Contact</a>
+  <a href="#contact"  onclick="closeMobile()" class="m-cta">Get a Proposal</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <div class="hero-glow-r"></div>
+  <div class="hero-glow-l"></div>
+  <div class="hero-inner">
+
+    <div class="hero-left">
+      <div class="hero-kicker">Zorvintech Private Limited · Est. 2026</div>
+      <h1>
+        Strength.<br>
+        <span class="outline">Vision.</span><br>
+        <span class="outline2">Technology.</span>
+      </h1>
+      <p class="hero-sub">We deliver powerful IT projects, Non-IT operational support, and strategic technology consulting to businesses in India and the UK — on time, on budget, every time.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary-gold">Start a Project →</a>
+        <a href="#services" class="btn-outline-white">Explore Services</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="dot"></span> Visakhapatnam, India</div>
+        <div class="trust-item"><span class="dot"></span> Serving India & UK</div>
+        <div class="trust-item"><span class="dot"></span> 24-48h Proposal</div>
+        <div class="trust-item"><span class="dot"></span> 90-day Free Support</div>
+      </div>
+    </div>
+
+    <div class="hero-cards">
+      <div class="h-card">
+        <div class="h-card-icon">💻</div>
+        <div>
+          <h4>IT Projects</h4>
+          <p>Web & mobile apps, cloud, DevOps, automation & API integrations</p>
+        </div>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">📋</div>
+        <div>
+          <h4>Non-IT Projects</h4>
+          <p>Data entry, documentation, PDF accessibility & back-office support</p>
+        </div>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">📊</div>
+        <div>
+          <h4>IT Consulting</h4>
+          <p>IT roadmaps, cloud migration, system integration & staff augmentation</p>
+        </div>
+      </div>
+      <div class="h-card stat-row">
+        <div class="stats-row">
+          <div class="stat-item"><div class="stat-n">50+</div><div class="stat-l">Projects Delivered</div></div>
+          <div class="stat-item"><div class="stat-n">30+</div><div class="stat-l">Happy Clients</div></div>
+          <div class="stat-item"><div class="stat-n">24h</div><div class="stat-l">Proposal Turnaround</div></div>
+          <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">Service Verticals</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about section" id="about">
+  <div class="container about-grid">
+    <div class="about-visual reveal-l">
+      <div class="about-card-main">
+        <div class="about-quote">
+          "Built on <em>strength</em>, guided by <em>vision</em>, powered by <em>technology</em> — we solve real business problems on time and on budget."
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kpi-n">50+</div><div class="kpi-l">Projects Delivered</div></div>
+          <div class="kpi"><div class="kpi-n">30+</div><div class="kpi-l">Happy Clients</div></div>
+          <div class="kpi"><div class="kpi-n">3</div><div class="kpi-l">Service Verticals</div></div>
+          <div class="kpi"><div class="kpi-n">24h</div><div class="kpi-l">Proposal Turnaround</div></div>
+        </div>
+      </div>
+      <div class="about-badge">✦ Visakhapatnam, India · Est. 2026</div>
+    </div>
+    <div class="about-text reveal-r">
+      <div class="eyebrow violet">About Us</div>
+      <h2 class="heading">Who We Are</h2>
+      <p>Zorvintech Private Limited is a Visakhapatnam-based technology and business services company helping SMEs, startups, and enterprises in India and the United Kingdom deliver projects faster and smarter.</p>
+      <p>Our name says it all — <strong>Zor</strong> (strength of execution), <strong>Vin</strong> (clarity of vision), <strong>Tech</strong> (depth of technology). We combine all three to deliver comprehensive solutions tailored to your unique business needs.</p>
+      <div class="value-grid">
+        <div class="value-pill"><span class="vi">✓</span> ISO-aligned Quality Processes</div>
+        <div class="value-pill"><span class="vi">✓</span> Dedicated Project Manager</div>
+        <div class="value-pill"><span class="vi">✓</span> 90-Day Free Post-Delivery Support</div>
+        <div class="value-pill"><span class="vi">✓</span> Proposals in 24–48 Hours</div>
+        <div class="value-pill"><span class="vi">✓</span> India & UK Market Expertise</div>
+        <div class="value-pill"><span class="vi">✓</span> GDPR & Compliance Aware</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section class="services section" id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <div class="eyebrow gold">What We Do</div>
+        <h2 class="heading light">Three Core Service Pillars</h2>
+      </div>
+      <p class="subtext light" style="max-width:380px;">End-to-end delivery across IT, operations, and strategic technology consulting.</p>
+    </div>
+    <div class="services-grid reveal">
+
+      <div class="svc">
+        <div class="svc-number">01</div>
+        <h3>IT Projects</h3>
+        <p>Full-cycle software delivery from idea to production. We build robust, scalable digital products for businesses of all sizes.</p>
+        <ul class="svc-list">
+          <li>Web & Mobile App Development (React, Flutter, Node.js)</li>
+          <li>Cloud Architecture & DevOps (AWS, Azure, GCP)</li>
+          <li>Automation, APIs & System Integrations</li>
+          <li>QA, Security Testing & Performance Optimisation</li>
+          <li>Post-Launch Maintenance & SLA Support</li>
+        </ul>
+        <a href="#contact" class="svc-link">Discuss a Project →</a>
+      </div>
+
+      <div class="svc">
+        <div class="svc-number">02</div>
+        <h3>Non-IT Projects</h3>
+        <p>Operational support services that free your team to focus on growth while we handle the critical back-office work with precision.</p>
+        <ul class="svc-list">
+          <li>High-Volume Data Entry & Data Management</li>
+          <li>Technical Writing & Process Documentation</li>
+          <li>PDF Accessibility Remediation (WCAG 2.1 / Section 508)</li>
+          <li>Back-Office & Administrative Support</li>
+          <li>Business Reporting & Operations Management</li>
+        </ul>
+        <a href="#contact" class="svc-link">Discuss a Project →</a>
+      </div>
+
+      <div class="svc">
+        <div class="svc-number">03</div>
+        <h3>IT Consulting</h3>
+        <p>Strategic technology advisory that aligns your IT investments with business objectives and delivers measurable results.</p>
+        <ul class="svc-list">
+          <li>IT Roadmap & Digital Transformation Strategy</li>
+          <li>Cloud Migration Planning & Execution</li>
+          <li>System Integration & Enterprise Architecture</li>
+          <li>Ongoing IT Support & Managed Services</li>
+          <li>Staff Augmentation & Resource Outsourcing</li>
+        </ul>
+        <a href="#contact" class="svc-link">Discuss a Project →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS ══════════ -->
+<section class="process section" id="process">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:4.5rem;" class="reveal">
+      <div class="eyebrow violet" style="justify-content:center;">
+        <span style="width:28px;height:1px;background:var(--violet);display:inline-block;"></span>
+        How We Work
+        <span style="width:28px;height:1px;background:var(--violet);display:inline-block;"></span>
+      </div>
+      <h2 class="heading">Our Engagement Process</h2>
+      <p class="subtext" style="margin: 0 auto; text-align:center;">A structured, transparent process that keeps you in control from day one to launch.</p>
+    </div>
+    <div class="process-track reveal">
+      <div class="p-step">
+        <div class="p-ball">🔍<div class="p-num">1</div></div>
+        <h4>Discover</h4>
+        <p>Understand your goals, constraints & requirements in depth</p>
+      </div>
+      <div class="p-step">
+        <div class="p-ball">📝<div class="p-num">2</div></div>
+        <h4>Plan</h4>
+        <p>Detailed scope, timeline, team allocation & cost plan</p>
+      </div>
+      <div class="p-step">
+        <div class="p-ball">🔨<div class="p-num">3</div></div>
+        <h4>Build</h4>
+        <p>Agile delivery — sprints, demos & feedback loops</p>
+      </div>
+      <div class="p-step">
+        <div class="p-ball">✅<div class="p-num">4</div></div>
+        <h4>Test</h4>
+        <p>QA, UAT, performance & security validation</p>
+      </div>
+      <div class="p-step">
+        <div class="p-ball">🎧<div class="p-num">5</div></div>
+        <h4>Support</h4>
+        <p>Handover, team training & ongoing SLA support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TECH STACK ══════════ -->
+<section class="stack section-sm" id="stack">
+  <div class="container">
+    <div style="margin-bottom:3rem;" class="reveal">
+      <div class="eyebrow light">Technologies</div>
+      <h2 class="heading light">Our Technology Stack</h2>
+    </div>
+    <div class="stack-grid reveal">
+      <div class="stack-cat">
+        <h4>Frontend</h4>
+        <ul>
+          <li>React / Next.js</li><li>Angular</li><li>Vue.js</li>
+          <li>Flutter</li><li>React Native</li>
+        </ul>
+      </div>
+      <div class="stack-cat">
+        <h4>Backend</h4>
+        <ul>
+          <li>Node.js</li><li>Python / FastAPI</li><li>Java / Spring</li>
+          <li>.NET Core</li><li>PHP / Laravel</li>
+        </ul>
+      </div>
+      <div class="stack-cat">
+        <h4>Cloud</h4>
+        <ul>
+          <li>Amazon AWS</li><li>Microsoft Azure</li><li>Google Cloud</li>
+          <li>Docker / Kubernetes</li><li>Terraform</li>
+        </ul>
+      </div>
+      <div class="stack-cat">
+        <h4>Databases</h4>
+        <ul>
+          <li>PostgreSQL</li><li>MongoDB</li><li>MySQL</li>
+          <li>Redis</li><li>Elasticsearch</li>
+        </ul>
+      </div>
+      <div class="stack-cat">
+        <h4>DevOps / QA</h4>
+        <ul>
+          <li>GitHub Actions</li><li>Jenkins</li><li>Selenium</li>
+          <li>Postman / Newman</li><li>SonarQube</li>
+        </ul>
+      </div>
+      <div class="stack-cat">
+        <h4>Tools</h4>
+        <ul>
+          <li>Jira / Confluence</li><li>Figma</li><li>Slack / Teams</li>
+          <li>Power BI</li><li>MS Office 365</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ENGAGEMENT MODELS ══════════ -->
+<section class="models section" id="models">
+  <div class="container">
+    <div style="margin-bottom:4rem;" class="reveal">
+      <div class="eyebrow violet">Engagement Models</div>
+      <h2 class="heading">How We Work Together</h2>
+      <p class="subtext">Choose the model that fits your project size, budget, and working style.</p>
+    </div>
+    <div class="models-grid reveal">
+
+      <div class="model">
+        <div class="model-icon">📄</div>
+        <h3>Fixed-Scope Project</h3>
+        <p class="desc">Fully defined scope, deliverables & timeline with a fixed price agreed upfront. No surprises, no scope creep.</p>
+        <ul class="model-feats">
+          <li>Clearly defined deliverables & timeline</li>
+          <li>Fixed price agreed before work begins</li>
+          <li>Milestone-based payment schedule</li>
+          <li>Ideal for MVPs, websites & one-off integrations</li>
+        </ul>
+        <div class="model-tag">✦ Best for: Startups & one-off projects</div>
+      </div>
+
+      <div class="model featured">
+        <div class="model-badge">Most Popular</div>
+        <div class="model-icon">👥</div>
+        <h3>Dedicated Resource / Team</h3>
+        <p class="desc">Your own offshore developer or full team. Flexible ramp-up/down, working in your timezone with daily standups.</p>
+        <ul class="model-feats">
+          <li class="gold-li">Flexible ramp-up and ramp-down</li>
+          <li class="gold-li">UK / IST timezone overlap</li>
+          <li class="gold-li">Daily standups & code repo access</li>
+          <li class="gold-li">Scale without the hiring overhead</li>
+        </ul>
+        <div class="model-tag" style="border-color:var(--border-g); color:var(--gold2);">✦ Best for: Product companies & scale-ups</div>
+      </div>
+
+      <div class="model">
+        <div class="model-icon">🤝</div>
+        <h3>Support & Consulting Retainer</h3>
+        <p class="desc">A monthly block of hours — use as needed for IT advisory, ongoing support, or small change requests.</p>
+        <ul class="model-feats">
+          <li>Monthly block of hours, use flexibly</li>
+          <li>Priority response SLA guaranteed</li>
+          <li>Partial roll-over of unused hours</li>
+          <li>IT advisory included in every retainer</li>
+        </ul>
+        <div class="model-tag">✦ Best for: SMEs needing ongoing IT support</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ USE CASES ══════════ -->
+<section class="cases section" id="cases">
+  <div class="container">
+    <div style="margin-bottom:4rem;" class="reveal">
+      <div class="eyebrow gold">Use Cases</div>
+      <h2 class="heading light">Sample Project Outcomes</h2>
+      <p class="subtext light">Real problems we've solved. Client names will be confirmed once approved.</p>
+    </div>
+    <div class="cases-grid reveal">
+
+      <div class="case-card">
+        <div class="case-type">IT Project</div>
+        <h3>UK-based SaaS Startup<br><span style="color:rgba(255,255,255,0.4); font-size:0.85rem; font-weight:400;">[ Client name placeholder ]</span></h3>
+        <div class="case-block">
+          <div class="case-label">Challenge</div>
+          <div class="case-text">Legacy monolithic app was slow, unscalable and costing £12,000/month on infrastructure with frequent downtime.</div>
+        </div>
+        <div class="case-block">
+          <div class="case-label">Solution</div>
+          <div class="case-text">Re-architected to microservices on AWS with CI/CD pipelines, auto-scaling and 99.95% uptime SLA.</div>
+        </div>
+        <div class="case-result">
+          <div class="case-label label">Result</div>
+          <div class="case-text">60% infrastructure cost reduction · 3× performance improvement · Zero downtime deployment</div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-type">Non-IT Project</div>
+        <h3>Indian NBFC – Finance Team<br><span style="color:rgba(255,255,255,0.4); font-size:0.85rem; font-weight:400;">[ Client name placeholder ]</span></h3>
+        <div class="case-block">
+          <div class="case-label">Challenge</div>
+          <div class="case-text">2,000+ daily loan documents requiring manual data extraction, filing and WCAG-compliant PDF remediation.</div>
+        </div>
+        <div class="case-block">
+          <div class="case-label">Solution</div>
+          <div class="case-text">Structured data entry pipeline, automated PDF tagging and a daily operations reporting dashboard.</div>
+        </div>
+        <div class="case-result">
+          <div class="case-label label">Result</div>
+          <div class="case-text">98% accuracy · 4× faster processing · Full WCAG 2.1 Section 508 compliance achieved</div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-type">IT Consulting</div>
+        <h3>Mid-size Manufacturing Company<br><span style="color:rgba(255,255,255,0.4); font-size:0.85rem; font-weight:400;">[ Client name placeholder ]</span></h3>
+        <div class="case-block">
+          <div class="case-label">Challenge</div>
+          <div class="case-text">No IT strategy, disparate legacy systems, no cloud adoption and rapidly rising support costs.</div>
+        </div>
+        <div class="case-block">
+          <div class="case-label">Solution</div>
+          <div class="case-text">3-year IT roadmap, ERP integration blueprint and phased cloud migration plan to Microsoft Azure.</div>
+        </div>
+        <div class="case-result">
+          <div class="case-label label">Result</div>
+          <div class="case-text">30% IT cost saving forecast · Single pane-of-glass operations view · Board-ready IT governance</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WHY ZORVINTECH ══════════ -->
+<section class="why section" id="why">
+  <div class="container">
+    <div style="margin-bottom:3.5rem; text-align:center;" class="reveal">
+      <div class="eyebrow violet" style="justify-content:center;">
+        <span style="width:28px;height:1px;background:var(--violet);display:inline-block;"></span>
+        Why Choose Us
+        <span style="width:28px;height:1px;background:var(--violet);display:inline-block;"></span>
+      </div>
+      <h2 class="heading">What Makes Zorvintech Different</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h4>Quick Response</h4>
+        <p>We respond to all enquiries within 4 business hours and deliver full proposals within 24–48 hours. No delays, no waiting.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <h4>Transparent Communication</h4>
+        <p>Weekly status reports, dedicated Slack/Teams channel, live project dashboards. You always know exactly where things stand.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h4>Flexible Engagement</h4>
+        <p>Fixed-price, Time & Materials, or dedicated resource retainers — we adapt to your budget, timeline, and working style.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h4>Quality Guaranteed</h4>
+        <p>Every deliverable goes through our QA checklist. We don't close a project or invoice the final milestone until you are satisfied.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <h4>India & UK Expertise</h4>
+        <p>Dual-market knowledge — we understand UK business norms, GDPR compliance, timezone overlaps and Indian delivery efficiency.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔄</div>
+        <h4>Post-Delivery Support</h4>
+        <p>90-day free support on all IT projects, plus affordable retainer plans for ongoing peace of mind after go-live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="contact section" id="contact">
+  <div class="container contact-grid">
+
+    <div class="contact-info reveal-l">
+      <div class="eyebrow gold">Get In Touch</div>
+      <h2 class="heading">Let's Build Something Together</h2>
+      <p class="contact-intro">Share your requirement — we'll send a detailed, no-obligation proposal within 24–48 hours. For urgent enquiries, call or WhatsApp us directly.</p>
+      <div class="c-list">
+        <div class="c-item">
+          <div class="c-icon-box">📧</div>
+          <div class="c-meta">
+            <div class="c-label">Email Us</div>
+            <div class="c-value">nbkoti.uk@gmail.com</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">📞</div>
+          <div class="c-meta">
+            <div class="c-label">Call / WhatsApp</div>
+            <div class="c-value">+91 9666313567</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">🌐</div>
+          <div class="c-meta">
+            <div class="c-label">Website</div>
+            <div class="c-value">www.zorvintech.in</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">📍</div>
+          <div class="c-meta">
+            <div class="c-label">Registered Office</div>
+            <div class="c-value">Visakhapatnam, Andhra Pradesh, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-r">
+      <div class="contact-form">
+        <div class="form-title">Send Us Your Requirement</div>
+        <div class="form-sub">Fill in the form and we'll get back to you within 24 hours.</div>
+        <div class="f-row">
+          <div class="fg"><label>Your Name *</label><input type="text" placeholder="John Smith"></div>
+          <div class="fg"><label>Company</label><input type="text" placeholder="Acme Ltd."></div>
+        </div>
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="john@company.com"></div>
+        <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 or +44..."></div>
+        <div class="fg">
+          <label>Service Required</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>IT Projects — Web / Mobile / Cloud</option>
+            <option>Non-IT Projects — Data Entry / Documentation / PDF</option>
+            <option>IT Consulting & Strategy</option>
+            <option>Staff Augmentation / Dedicated Team</option>
+            <option>Multiple / Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell Us About Your Project *</label><textarea placeholder="Describe your requirement, expected timeline, and budget range..."></textarea></div>
+        <button class="submit-btn" id="submitBtn">Send Requirement →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="f-logo">Zorvin<span>tech</span> Private Limited</div>
+      <p>Strength. Vision. Technology.<br>End-to-end IT, Non-IT and consulting services for businesses in India and the United Kingdom.</p>
+      <div class="footer-badges">
+        <span class="f-badge">Est. 2026</span>
+        <span class="f-badge">Visakhapatnam, India</span>
+        <span class="f-badge">Serving India & UK</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">IT Projects</a></li>
+        <li><a href="#services">Non-IT Projects</a></li>
+        <li><a href="#services">IT Consulting</a></li>
+        <li><a href="#models">Staff Augmentation</a></li>
+        <li><a href="#models">Support Retainers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Zorvintech</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#stack">Technologies</a></li>
+        <li><a href="#cases">Use Cases</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:nbkoti.uk@gmail.com">nbkoti.uk@gmail.com</a></li>
+        <li><a href="tel:+919666313567">+91 9666313567</a></li>
+        <li><a href="https://wa.me/919666313567">WhatsApp Us</a></li>
+        <li><a href="#contact">Send a Proposal Request</a></li>
+        <li><a href="#">Visakhapatnam, AP, India</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Zorvintech Private Limited. All rights reserved. | Registered in India.</span>
+    <div class="brand-strip">
+      <span>Strength</span><span class="dot"></span>
+      <span>Vision</span><span class="dot"></span>
+      <span style="color:var(--gold);">Technology</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Scroll reveal ─────────────────────────── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => revealObs.observe(el));
+
+/* ── Nav scroll shadow ─────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── Hamburger menu ────────────────────────── */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ── Form submit ───────────────────────────── */
+document.getElementById('submitBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  const btn = this;
+  btn.textContent = '⏳ Sending...';
+  setTimeout(() => {
+    btn.textContent = '✅ Sent! We\'ll respond within 24 hours.';
+    btn.classList.add('success');
+  }, 1200);
+});
+
+/* ── Active nav link ───────────────────────── */
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--gold)' : '';
+  });
+});
+</script>
+</body>
+</html>
